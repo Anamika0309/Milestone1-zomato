@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: crave-ai-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn milestone1.phases.phase6_api.app:create_app --host 0.0.0.0 --port $PORT --factory
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: PYTHONPATH
+        value: "/app/phase6-deploy"
