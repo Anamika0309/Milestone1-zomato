@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 95%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 95%;
+  }
+}
+
+body {
+  color: rgb(248 250 252);
+  background: rgb(15 23 42);
+}
+
+html.dark body {
+  color: rgb(248 250 252);
+  background: rgb(15 23 42);
+}
+
+html.light body {
+  color: rgb(15 23 42);
+  background: rgb(248 250 252);
+}
