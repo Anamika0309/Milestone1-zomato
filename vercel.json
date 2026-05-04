@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd web && npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "cd web && npm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://crave-ai-backend.onrender.com/api/$1"
+    }
+  ]
+}
