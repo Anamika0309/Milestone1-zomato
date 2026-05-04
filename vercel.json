@@ -1,7 +1,7 @@
 {
-  "buildCommand": "cd web && npm ci --production=false",
-  "outputDirectory": "web/.next",
-  "installCommand": "cd web && npm ci --production=false",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
   "framework": "nextjs",
   "rewrites": [
     {
