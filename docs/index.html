@@ -1,93 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Crave AI Test</title>
+    <title>Crave AI - Smart Restaurant Recommendations</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dark {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark .bg-white {
+            background-color: #2a2a2a;
+        }
+        .dark .bg-gray-50 {
+            background-color: #2a2a2a;
+        }
+        .dark .text-gray-900 {
+            color: #ffffff;
+        }
+        .dark .text-gray-600 {
+            color: #cccccc;
+        }
+        .dark .border-gray-300 {
+            border-color: #444444;
+        }
+        .dark .bg-gray-100 {
+            background-color: #333333;
+        }
+        .dark input, .dark select, .dark textarea {
+            background-color: #2a2a2a;
+            border-color: #444444;
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 p-8">
-    <h1 class="text-3xl font-bold mb-8">Crave AI - Test Version</h1>
-    
-    <div class="max-w-2xl mx-auto">
-        <h2 class="text-xl font-semibold mb-4">Test Form</h2>
-        
-        <form id="testForm" class="space-y-4 mb-8">
-            <div>
-                <label class="block text-sm font-medium mb-1">Location</label>
-                <select id="location" class="w-full p-2 border rounded">
-                    <option value="">Select location</option>
-                    <option value="Brookefield">Brookefield</option>
-                    <option value="Indiranagar">Indiranagar</option>
-                </select>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-2xl font-bold text-blue-600">🍽️ Crave AI</h1>
+                <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100 transition">
+                    <span id="theme-icon">🌙</span>
+                </button>
             </div>
-            
-            <div>
-                <label class="block text-sm font-medium mb-1">Budget</label>
-                <select id="budget" class="w-full p-2 border rounded">
-                    <option value="">Select budget</option>
-                    <option value="low">Under ₹500</option>
-                    <option value="medium">₹500-₹1000</option>
-                </select>
-            </div>
-            
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-                Get Recommendations
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Your Personalized Restaurant Guide</h2>
+            <p class="text-xl mb-8">Let our AI find the perfect dining experience for you</p>
+            <button onclick="document.getElementById('form').scrollIntoView()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Get Started
             </button>
-        </form>
-        
-        <div id="results" class="hidden">
-            <h3 class="text-xl font-semibold mb-4">Results:</h3>
-            <div id="restaurantCards" class="grid gap-4">
-                <!-- Results will appear here -->
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="form" class="py-16 bg-white">
+        <div class="max-w-2xl mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-8">Tell Us Your Preferences</h3>
+            
+            <form id="recommendationForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                    <select id="location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select location</option>
+                        <option value="Brookefield">Brookefield</option>
+                        <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
+                        <option value="Indiranagar">Indiranagar</option>
+                        <option value="Whitefield">Whitefield</option>
+                        <option value="HSR Layout">HSR Layout</option>
+                        <option value="Jayanagar">Jayanagar</option>
+                        <option value="BTM Layout">BTM Layout</option>
+                        <option value="Marathahalli">Marathahalli</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Budget per Person</label>
+                    <select id="budget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select budget</option>
+                        <option value="low">Under ₹500</option>
+                        <option value="medium">₹500-₹1000</option>
+                        <option value="high">₹1000-₹2000</option>
+                        <option value="premium">Above ₹2000</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Cuisine Type</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" value="indian" class="mr-2"> Indian
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="chinese" class="mr-2"> Chinese
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="italian" class="mr-2"> Italian
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="mexican" class="mr-2"> Mexican
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
+                    <select id="rating" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select rating</option>
+                        <option value="3">3+ Stars</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="4.5">4.5+ Stars</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
+                    <textarea id="notes" rows="3" placeholder="Any specific preferences..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                        Get Recommendations
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-16 bg-gray-50 hidden">
+        <div class="max-w-6xl mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Your Restaurant Recommendations</h3>
+            <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Recommendations will be inserted here -->
             </div>
         </div>
-        
-        <div id="debug" class="mt-8 p-4 bg-gray-100 rounded">
-            <h3 class="font-semibold mb-2">Debug Info:</h3>
-            <div id="debugInfo">Waiting for form submission...</div>
-        </div>
-    </div>
+    </section>
 
     <script>
-        // Debug function
-        function updateDebug(message) {
-            document.getElementById('debugInfo').innerHTML += '<br>' + message;
-            console.log(message);
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            document.getElementById('theme-icon').textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
         }
-        
-        updateDebug('JavaScript loaded successfully');
-        
-        // Form handler
-        document.getElementById('testForm').addEventListener('submit', function(e) {
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+
+        // Optimized form handler - instant results
+        document.getElementById('recommendationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            updateDebug('Form submitted!');
             
+            const submitBtn = document.getElementById('submit-btn');
+            const recommendationsSection = document.getElementById('recommendations');
+            const recommendationsGrid = document.getElementById('recommendations-grid');
+            
+            // Get form data
             const location = document.getElementById('location').value;
             const budget = document.getElementById('budget').value;
+            const rating = document.getElementById('rating').value;
+            const notes = document.getElementById('notes').value;
             
-            updateDebug('Location: ' + location);
-            updateDebug('Budget: ' + budget);
+            const cuisines = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
             
-            // Show results immediately
-            const resultsDiv = document.getElementById('results');
-            const cardsDiv = document.getElementById('restaurantCards');
+            // Optimized restaurant data - pre-defined for instant display
+            const restaurantData = {
+                'Brookefield': [
+                    { name: "Paradise Biryani", cuisine: "Biryani", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Authentic Hyderabadi biryani" },
+                    { name: "Meghana Foods", cuisine: "Andhra", rating: 4.3, price: "₹500", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Spicy Andhra cuisine" },
+                    { name: "Barbeque Nation", cuisine: "BBQ", rating: 4.6, price: "₹800", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Grilled delicacies" }
+                ],
+                'Indiranagar': [
+                    { name: "Toit", cuisine: "Brewery", rating: 4.4, price: "₹800", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Craft beer and pizza" },
+                    { name: "The Hole in the Wall", cuisine: "Cafe", rating: 4.2, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Cozy cafe atmosphere" },
+                    { name: "Smoke House Deli", cuisine: "Continental", rating: 4.5, price: "₹1000", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "European delicacies" }
+                ],
+                'default': [
+                    { name: "The Garden Restaurant", cuisine: "Indian", rating: 4.5, price: "₹800", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Authentic Indian cuisine" },
+                    { name: "Dragon Palace", cuisine: "Chinese", rating: 4.3, price: "₹600", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Traditional Chinese dishes" },
+                    { name: "Bella Italia", cuisine: "Italian", rating: 4.6, price: "₹1000", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Classic Italian pasta" }
+                ]
+            };
             
-            // Create sample restaurant cards
-            const restaurants = [
-                { name: 'Test Restaurant 1', cuisine: 'Indian', rating: 4.5, price: '₹800' },
-                { name: 'Test Restaurant 2', cuisine: 'Chinese', rating: 4.3, price: '₹600' }
-            ];
+            // Get restaurants for selected location or default
+            const restaurants = restaurantData[location] || restaurantData['default'];
             
-            cardsDiv.innerHTML = restaurants.map(r => `
-                <div class="bg-white p-4 border rounded shadow">
-                    <h4 class="font-bold">${r.name}</h4>
-                    <p>Cuisine: ${r.cuisine}</p>
-                    <p>Rating: ${r.rating} ⭐</p>
-                    <p>Price: ${r.price}</p>
+            // Display recommendations instantly - no delays
+            recommendationsGrid.innerHTML = restaurants.map(restaurant => `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">${restaurant.name}</h4>
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-500">⭐</span>
+                            <span class="ml-1">${restaurant.rating}</span>
+                            <span class="ml-auto text-gray-600">${restaurant.price}</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">${restaurant.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${restaurant.cuisine}</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
                 </div>
             `).join('');
             
-            resultsDiv.classList.remove('hidden');
-            updateDebug('Results displayed!');
+            // Show recommendations immediately
+            recommendationsSection.classList.remove('hidden');
+            recommendationsSection.scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
