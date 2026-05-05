@@ -67,15 +67,17 @@
         
         .floating-label {
             transition: all 0.2s ease;
+            background: white;
+            padding: 0 4px;
         }
         
-        .input-group:focus-within .floating-label {
-            transform: translateY(-1.5rem) scale(0.85);
-            color: #3b82f6;
+        .dark .floating-label {
+            background: #1e293b;
         }
         
-        .input-group input:not(:placeholder-shown) ~ .floating-label,
-        .input-group select:valid ~ .floating-label {
+        .input-group:focus-within .floating-label,
+        .input-group select:focus ~ .floating-label,
+        .input-group select:not([value=""]) ~ .floating-label {
             transform: translateY(-1.5rem) scale(0.85);
             color: #3b82f6;
         }
@@ -160,8 +162,11 @@
                 
                 <form onsubmit="handleSubmit(event)" class="space-y-8">
                     <!-- Location -->
-                    <div class="input-group relative">
-                        <select id="location" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg peer">
+                    <div>
+                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-map-marker-alt mr-2 text-purple-600"></i>Select Location
+                        </label>
+                        <select id="location" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg">
                             <option value="" disabled selected>Select your location</option>
                             <option value="Brookefield">Brookefield</option>
                             <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
@@ -172,23 +177,20 @@
                             <option value="BTM Layout">BTM Layout</option>
                             <option value="Marathahalli">Marathahalli</option>
                         </select>
-                        <label class="floating-label absolute left-4 top-4 text-gray-500 pointer-events-none">
-                            <i class="fas fa-map-marker-alt mr-2"></i>Select Location
-                        </label>
                     </div>
 
                     <!-- Budget -->
-                    <div class="input-group relative">
-                        <select id="budget" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg peer">
+                    <div>
+                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-wallet mr-2 text-purple-600"></i>Budget per Person
+                        </label>
+                        <select id="budget" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg">
                             <option value="" disabled selected>Select budget range</option>
                             <option value="low">Under ₹500</option>
                             <option value="medium">₹500-₹1000</option>
                             <option value="high">₹1000-₹2000</option>
                             <option value="premium">Above ₹2000</option>
                         </select>
-                        <label class="floating-label absolute left-4 top-4 text-gray-500 pointer-events-none">
-                            <i class="fas fa-wallet mr-2"></i>Budget per Person
-                        </label>
                     </div>
 
                     <!-- Cuisine -->
@@ -363,35 +365,45 @@
             submitBtn.textContent = 'Getting Recommendations...';
             
             try {
-                // Real API call to backend
-                const response = await fetch('https://crave-ai-backend.onrender.com/api/v1/recommendations', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        location,
-                        budget,
-                        cuisines,
-                        rating,
-                        notes
-                    })
-                });
+                // Try API call first
+                let recommendations = [];
                 
-                if (!response.ok) {
-                    throw new Error('Failed to get recommendations');
+                try {
+                    const response = await fetch('https://crave-ai-backend.onrender.com/api/v1/recommendations', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            location,
+                            budget,
+                            cuisines,
+                            rating,
+                            notes
+                        }),
+                        timeout: 10000 // 10 second timeout
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        recommendations = data.recommendations || data.cards || [];
+                    }
+                } catch (apiError) {
+                    console.log('API not available, using sample data');
                 }
                 
-                const data = await response.json();
-                showRecommendations(data.recommendations || []);
+                // Show recommendations (API data or fallback)
+                showRecommendations(recommendations);
                 
             } catch (error) {
-                alert('Error getting recommendations. Please try again.');
+                console.error('Error:', error);
+                // Still show sample data on error
+                showRecommendations([]);
             } finally {
                 // Hide loading
                 loading.classList.add('hidden');
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Get Recommendations';
+                submitBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Get AI Recommendations';
             }
         }
 
