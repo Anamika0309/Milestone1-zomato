@@ -81,29 +81,55 @@
             const rating = document.getElementById('rating').value;
             const cuisine = document.getElementById('cuisine').value;
             
-            // Simple restaurant data
-            const restaurants = [
-                {
-                    name: "Paradise Biryani",
-                    cuisine: "Indian",
-                    rating: 4.5,
-                    price: "₹600",
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400"
-                },
-                {
-                    name: "Dragon Palace",
-                    cuisine: "Chinese",
-                    rating: 4.3,
-                    price: "₹500",
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"
-                },
-                {
-                    name: "Bella Italia",
-                    cuisine: "Italian",
-                    rating: 4.6,
-                    price: "₹800",
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400"
-                }
+            // Location-specific restaurant data
+            const restaurantData = {
+                'Brookefield': [
+                    { name: "Paradise Biryani", cuisine: "Indian", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "Meghana Foods", cuisine: "Andhra", rating: 4.3, price: "₹500", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                    { name: "Barbeque Nation", cuisine: "BBQ", rating: 4.6, price: "₹800", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" }
+                ],
+                'Koramangala 3Rd Block': [
+                    { name: "Toit", cuisine: "Brewery", rating: 4.4, price: "₹900", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" },
+                    { name: "Truffles", cuisine: "Italian", rating: 4.5, price: "₹1200", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "Cafe Noir", cuisine: "Continental", rating: 4.2, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" }
+                ],
+                'Indiranagar': [
+                    { name: "The Hole in the Wall", cuisine: "Cafe", rating: 4.3, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "Smoke House Deli", cuisine: "Continental", rating: 4.6, price: "₹1000", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" },
+                    { name: "The Fatty Bao", cuisine: "Asian", rating: 4.4, price: "₹800", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" }
+                ],
+                'Whitefield': [
+                    { name: "The Whitefield Kitchen", cuisine: "Multi-cuisine", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "Olive Bar & Kitchen", cuisine: "Mediterranean", rating: 4.5, price: "₹1100", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" },
+                    { name: "The Biere Club", cuisine: "Brewery", rating: 4.2, price: "₹900", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" }
+                ],
+                'HSR Layout': [
+                    { name: "The HSR Club", cuisine: "Continental", rating: 4.4, price: "₹800", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "The Black Pearl", cuisine: "Seafood", rating: 4.6, price: "₹1200", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" },
+                    { name: "The Pasta Bar", cuisine: "Italian", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" }
+                ],
+                'Jayanagar': [
+                    { name: "The Jayanagar Kitchen", cuisine: "South Indian", rating: 4.5, price: "₹500", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "Mavalli Tiffins", cuisine: "Tiffin", rating: 4.2, price: "₹300", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                    { name: "The Garden Cafe", cuisine: "Cafe", rating: 4.4, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" }
+                ],
+                'BTM Layout': [
+                    { name: "The BTM Kitchen", cuisine: "North Indian", rating: 4.3, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "The Red Box", cuisine: "Chinese", rating: 4.5, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                    { name: "The Pizza Place", cuisine: "Pizza", rating: 4.4, price: "₹500", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" }
+                ],
+                'Marathahalli': [
+                    { name: "The Marathahalli Bistro", cuisine: "Continental", rating: 4.2, price: "₹800", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                    { name: "The Spice Garden", cuisine: "Indian", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                    { name: "The Urban Kitchen", cuisine: "Multi-cuisine", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" }
+                ]
+            };
+            
+            // Get restaurants for selected location
+            const restaurants = restaurantData[location] || [
+                { name: "Paradise Biryani", cuisine: "Indian", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400" },
+                { name: "Dragon Palace", cuisine: "Chinese", rating: 4.3, price: "₹500", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" },
+                { name: "Bella Italia", cuisine: "Italian", rating: 4.6, price: "₹800", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" }
             ];
             
             // Display results
