@@ -132,7 +132,7 @@
         }
 
         // Handle form submission
-        async function handleSubmit(event) {
+        function handleSubmit(event) {
             event.preventDefault();
             
             const loading = document.getElementById('loading');
@@ -154,10 +154,8 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Loading...';
             
-            try {
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
+            // Simulate loading for 1 second then show results
+            setTimeout(() => {
                 // Sample recommendations
                 const recommendations = [
                     {
@@ -208,18 +206,15 @@
                     </div>
                 `).join('');
                 
-                // Show recommendations
-                recommendationsSection.classList.remove('hidden');
-                recommendationsSection.scrollIntoView({ behavior: 'smooth' });
-                
-            } catch (error) {
-                alert('Error getting recommendations');
-            } finally {
                 // Hide loading
                 loading.classList.add('hidden');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Get Recommendations';
-            }
+                
+                // Show recommendations
+                recommendationsSection.classList.remove('hidden');
+                recommendationsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
         }
     </script>
 </body>
