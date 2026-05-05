@@ -3,40 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crave AI - Restaurant Recommendations</title>
+    <title>Crave AI - Smart Restaurant Recommendations</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .dark {
-            background-color: #0f172a;
+            background-color: #1a1a1a;
             color: #ffffff;
         }
         
         .dark .bg-white {
-            background-color: #1e293b;
-        }
-        
-        .dark .bg-gray-50 {
-            background-color: #1e293b;
+            background-color: #2a2a2a;
         }
         
         .dark .text-gray-900 {
@@ -44,129 +24,59 @@
         }
         
         .dark .text-gray-600 {
-            color: #94a3b8;
+            color: #cccccc;
         }
         
         .dark .border-gray-300 {
-            border-color: #475569;
-        }
-        
-        .dark .bg-blue-600 {
-            background-color: #3b82f6;
-        }
-        
-        .dark .bg-gray-100 {
-            background-color: #334155;
+            border-color: #444444;
         }
         
         .dark input, .dark select, .dark textarea {
-            background-color: #1e293b;
-            border-color: #475569;
+            background-color: #2a2a2a;
+            border-color: #444444;
             color: #ffffff;
         }
         
-        .floating-label {
-            transition: all 0.2s ease;
-            background: white;
-            padding: 0 4px;
+        .card-hover {
+            transition: all 0.3s ease;
         }
         
-        .dark .floating-label {
-            background: #1e293b;
-        }
-        
-        .input-group:focus-within .floating-label,
-        .input-group select:focus ~ .floating-label,
-        .input-group select:not([value=""]) ~ .floating-label {
-            transform: translateY(-1.5rem) scale(0.85);
-            color: #3b82f6;
-        }
-        
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .dark .glass-effect {
-            background: rgba(30, 41, 59, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
     <div id="app">
-        <!-- Header -->
-        <header class="glass-effect fixed top-0 left-0 right-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <div class="flex items-center space-x-3">
-                        <div class="animate-float">
-                            <i class="fas fa-utensils text-2xl text-purple-600"></i>
-                        </div>
-                        <h1 class="text-2xl font-bold gradient-bg bg-clip-text text-transparent">Crave AI</h1>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                            <span id="theme-icon" class="text-xl">🌙</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-
         <!-- Hero Section -->
-        <section class="gradient-bg text-white py-24 mt-16 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black opacity-20"></div>
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div class="animate-float mb-8">
-                    <i class="fas fa-robot text-6xl mb-6"></i>
-                </div>
-                <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                    Discover Amazing<br>
-                    <span class="text-yellow-300">Restaurants</span> with AI
+        <section class="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    🍽️ Crave AI
+                </h1>
+                <h2 class="text-2xl md:text-3xl mb-8 font-light">
+                    Your Personalized Restaurant Guide
                 </h2>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-                    Get personalized restaurant recommendations powered by artificial intelligence<br>
-                    based on your preferences, budget, and location
+                <p class="text-xl mb-12 max-w-2xl mx-auto opacity-90">
+                    Let our AI sommelier curate the perfect dining experience based on your unique preferences
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="scrollToForm()" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 hover:text-purple-700 transition transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-search mr-2"></i>
-                        Get Recommendations
-                    </button>
-                    <button onclick="showInfo()" class="border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition transform hover:scale-105">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        Learn More
-                    </button>
-                </div>
+                <button onclick="scrollToForm()" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    Get Started
+                </button>
             </div>
         </section>
 
         <!-- Preference Form -->
-        <section id="preference-form" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold mb-4 gradient-bg bg-clip-text text-transparent">Tell Us Your Preferences</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-lg">Let our AI find the perfect restaurant for you</p>
-                </div>
+        <section id="preference-form" class="py-16 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-bold text-center mb-12">Tell Us Your Preferences</h3>
                 
-                <form onsubmit="handleSubmit(event)" class="space-y-8">
+                <form onsubmit="handleSubmit(event)" class="space-y-6">
                     <!-- Location -->
                     <div>
-                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            <i class="fas fa-map-marker-alt mr-2 text-purple-600"></i>Select Location
-                        </label>
-                        <select id="location" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <select id="location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="" disabled selected>Select your location</option>
                             <option value="Brookefield">Brookefield</option>
                             <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
@@ -181,10 +91,8 @@
 
                     <!-- Budget -->
                     <div>
-                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            <i class="fas fa-wallet mr-2 text-purple-600"></i>Budget per Person
-                        </label>
-                        <select id="budget" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Budget per Person</label>
+                        <select id="budget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="" disabled selected>Select budget range</option>
                             <option value="low">Under ₹500</option>
                             <option value="medium">₹500-₹1000</option>
@@ -195,64 +103,57 @@
 
                     <!-- Cuisine -->
                     <div>
-                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">
-                            <i class="fas fa-utensils mr-2 text-purple-600"></i>Preferred Cuisine
-                        </label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="indian" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🍛 Indian</span>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Cuisine</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" value="indian" class="cuisine-checkbox mr-2">
+                                <span>Indian</span>
                             </label>
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="chinese" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🥡 Chinese</span>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="chinese" class="cuisine-checkbox mr-2">
+                                <span>Chinese</span>
                             </label>
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="italian" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🍕 Italian</span>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="italian" class="cuisine-checkbox mr-2">
+                                <span>Italian</span>
                             </label>
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="mexican" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🌮 Mexican</span>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="mexican" class="cuisine-checkbox mr-2">
+                                <span>Mexican</span>
                             </label>
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="japanese" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🍱 Japanese</span>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="japanese" class="cuisine-checkbox mr-2">
+                                <span>Japanese</span>
                             </label>
-                            <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition cursor-pointer">
-                                <input type="checkbox" value="american" class="cuisine-checkbox mr-3">
-                                <span class="text-lg">🍔 American</span>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="american" class="cuisine-checkbox mr-2">
+                                <span>American</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Rating -->
-                    <div class="input-group relative">
-                        <select id="rating" required class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg peer">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
+                        <select id="rating" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="" disabled selected>Select minimum rating</option>
                             <option value="3">3+ Stars</option>
                             <option value="4">4+ Stars</option>
                             <option value="4.5">4.5+ Stars</option>
                         </select>
-                        <label class="floating-label absolute left-4 top-4 text-gray-500 pointer-events-none">
-                            <i class="fas fa-star mr-2"></i>Minimum Rating
-                        </label>
                     </div>
 
                     <!-- Notes -->
                     <div>
-                        <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            <i class="fas fa-comment-dots mr-2 text-purple-600"></i>Additional Preferences (Optional)
-                        </label>
-                        <textarea id="notes" rows="4" placeholder="Any specific dietary requirements, allergies, or preferences..." 
-                                  class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg resize-none"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Preferences (Optional)</label>
+                        <textarea id="notes" rows="3" placeholder="Any specific dietary requirements or preferences..." 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="text-center pt-4">
-                        <button type="submit" id="submit-btn" class="gradient-bg text-white px-12 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition transform hover:scale-105">
-                            <i class="fas fa-magic mr-2"></i>
-                            Get AI Recommendations
+                    <div class="text-center">
+                        <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            Get Recommendations
                         </button>
                     </div>
                 </form>
@@ -260,54 +161,40 @@
         </section>
 
         <!-- Recommendations Section -->
-        <section id="recommendations" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold mb-4 gradient-bg bg-clip-text text-transparent">Your AI Recommendations</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-lg">Perfect restaurants handpicked just for you</p>
-                </div>
-                <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section id="recommendations" class="py-16 bg-gray-50 hidden">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-bold text-center mb-12">Your Restaurant Recommendations</h3>
+                <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Recommendations will be inserted here -->
                 </div>
             </div>
         </section>
 
         <!-- Loading State -->
-        <div id="loading" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center max-w-md mx-4 shadow-2xl">
-                <div class="mb-6">
-                    <div class="animate-spin rounded-full h-16 w-16 border-4 border-purple-600 border-t-transparent mx-auto"></div>
-                </div>
-                <h4 class="text-2xl font-bold mb-2 gradient-bg bg-clip-text text-transparent">AI is Working</h4>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">Finding perfect restaurants for you...</p>
-                <div class="flex justify-center space-x-2">
-                    <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
-                    <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                    <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                </div>
+        <div id="loading" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Finding perfect restaurants for you...</p>
             </div>
         </div>
 
         <!-- Info Modal -->
-        <div id="info-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-lg mx-4 shadow-2xl">
-                <div class="text-center mb-6">
-                    <div class="animate-float mb-4">
-                        <i class="fas fa-robot text-5xl text-purple-600"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold mb-4 gradient-bg bg-clip-text text-transparent">About Crave AI</h3>
-                </div>
-                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                    Crave AI uses advanced artificial intelligence to provide personalized restaurant recommendations based on your preferences, location, and budget. Our smart algorithm analyzes thousands of restaurants to find the perfect match for you.
+        <div id="info-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+                <h3 class="text-2xl font-bold mb-4">About Crave AI</h3>
+                <p class="text-gray-600 mb-6">
+                    Crave AI uses advanced artificial intelligence to provide personalized restaurant recommendations based on your preferences, location, and budget.
                 </p>
-                <div class="flex justify-center space-x-4">
-                    <button onclick="closeInfo()" class="gradient-bg text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl transition transform hover:scale-105">
-                        <i class="fas fa-check mr-2"></i>
-                        Got it!
-                    </button>
-                </div>
+                <button onclick="closeInfo()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Got it!
+                </button>
             </div>
         </div>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="fixed bottom-4 right-4 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition z-40">
+            <span id="theme-icon">🌙</span>
+        </button>
     </div>
 
     <script>
@@ -448,30 +335,20 @@
             }
             
             recommendationsGrid.innerHTML = recommendations.map((restaurant, index) => `
-                <div class="card-hover bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
-                    <div class="relative">
-                        <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-56 object-cover">
-                        <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-full px-3 py-1 shadow-lg">
-                            <span class="text-sm font-semibold">#${index + 1}</span>
-                        </div>
-                    </div>
+                <div class="card-hover bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h4 class="text-2xl font-bold mb-3 gradient-bg bg-clip-text text-transparent">${restaurant.name}</h4>
-                        <div class="flex items-center mb-3">
-                            <div class="flex items-center bg-yellow-100 dark:bg-yellow-900/30 px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500 mr-1"></i>
-                                <span class="font-semibold">${restaurant.rating}</span>
-                            </div>
-                            <span class="ml-auto text-lg font-bold text-purple-600">${restaurant.price}</span>
+                        <h4 class="text-xl font-bold mb-2">${restaurant.name}</h4>
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-500">⭐</span>
+                            <span class="ml-1">${restaurant.rating}</span>
+                            <span class="ml-auto text-gray-600">${restaurant.price}</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">${restaurant.description}</p>
+                        <p class="text-gray-600 mb-4">${restaurant.description}</p>
                         <div class="flex items-center justify-between">
-                            <span class="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 text-purple-800 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-semibold">
-                                <i class="fas fa-utensils mr-2"></i>${restaurant.cuisine}
-                            </span>
-                            <button class="gradient-bg text-white px-4 py-2 rounded-full font-semibold hover:shadow-lg transition transform hover:scale-105">
-                                <i class="fas fa-arrow-right mr-2"></i>
-                                View
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${restaurant.cuisine}</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
+                                View Details
                             </button>
                         </div>
                     </div>
