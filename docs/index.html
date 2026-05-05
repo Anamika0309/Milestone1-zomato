@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crave AI - Restaurant Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dark {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark .bg-white {
+            background-color: #2a2a2a;
+        }
+        .dark .bg-gray-50 {
+            background-color: #2a2a2a;
+        }
+        .dark .text-gray-900 {
+            color: #ffffff;
+        }
+        .dark .text-gray-600 {
+            color: #cccccc;
+        }
+        .dark .border-gray-300 {
+            border-color: #444444;
+        }
+        .dark .bg-blue-600 {
+            background-color: #2563eb;
+        }
+        .dark .bg-gray-100 {
+            background-color: #333333;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div id="app">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-blue-600">🍽️ Crave AI</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100">
+                            <span id="theme-icon">🌙</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Discover Amazing Restaurants with AI
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Get personalized restaurant recommendations based on your preferences, budget, and location
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToForm()" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Get Recommendations
+                    </button>
+                    <button onclick="showInfo()" class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preference Form -->
+        <section id="preference-form" class="py-16 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-bold text-center mb-12">Tell Us Your Preferences</h3>
+                
+                <form onsubmit="handleSubmit(event)" class="space-y-6">
+                    <!-- Location -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <input type="text" id="location" required placeholder="Enter your city or area" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Budget -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Budget per Person</label>
+                        <select id="budget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select budget range</option>
+                            <option value="low">Under ₹500</option>
+                            <option value="medium">₹500-₹1000</option>
+                            <option value="high">₹1000-₹2000</option>
+                            <option value="premium">Above ₹2000</option>
+                        </select>
+                    </div>
+
+                    <!-- Cuisine -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Cuisine</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" value="indian" class="cuisine-checkbox mr-2">
+                                <span>Indian</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="chinese" class="cuisine-checkbox mr-2">
+                                <span>Chinese</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="italian" class="cuisine-checkbox mr-2">
+                                <span>Italian</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="mexican" class="cuisine-checkbox mr-2">
+                                <span>Mexican</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="japanese" class="cuisine-checkbox mr-2">
+                                <span>Japanese</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" value="american" class="cuisine-checkbox mr-2">
+                                <span>American</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
+                        <select id="rating" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select minimum rating</option>
+                            <option value="3">3+ Stars</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="4.5">4.5+ Stars</option>
+                        </select>
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Preferences (Optional)</label>
+                        <textarea id="notes" rows="3" placeholder="Any specific dietary requirements or preferences..." 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            Get Recommendations
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="py-16 bg-gray-50 hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-bold text-center mb-12">Your Restaurant Recommendations</h3>
+                <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Recommendations will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loading" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Finding perfect restaurants for you...</p>
+            </div>
+        </div>
+
+        <!-- Info Modal -->
+        <div id="info-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+                <h3 class="text-2xl font-bold mb-4">About Crave AI</h3>
+                <p class="text-gray-600 mb-6">
+                    Crave AI uses advanced artificial intelligence to provide personalized restaurant recommendations based on your preferences, location, and budget.
+                </p>
+                <button onclick="closeInfo()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('dark');
+            icon.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+            
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+
+        // Scroll to form
+        function scrollToForm() {
+            document.getElementById('preference-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show info modal
+        function showInfo() {
+            document.getElementById('info-modal').classList.remove('hidden');
+        }
+
+        // Close info modal
+        function closeInfo() {
+            document.getElementById('info-modal').classList.add('hidden');
+        }
+
+        // Handle form submission
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const loading = document.getElementById('loading');
+            
+            // Get form data
+            const location = document.getElementById('location').value;
+            const budget = document.getElementById('budget').value;
+            const rating = document.getElementById('rating').value;
+            const notes = document.getElementById('notes').value;
+            
+            const cuisines = Array.from(document.querySelectorAll('.cuisine-checkbox:checked'))
+                .map(cb => cb.value);
+            
+            // Show loading
+            loading.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Getting Recommendations...';
+            
+            try {
+                // Simulate API call (replace with actual API call)
+                await simulateAPICall(location, budget, cuisines, rating, notes);
+                
+                // Show recommendations
+                showRecommendations(location, budget, cuisines, rating, notes);
+                
+            } catch (error) {
+                alert('Error getting recommendations. Please try again.');
+            } finally {
+                // Hide loading
+                loading.classList.add('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Recommendations';
+            }
+        }
+
+        // Simulate API call
+        function simulateAPICall(location, budget, cuisines, rating, notes) {
+            return new Promise(resolve => setTimeout(resolve, 2000));
+        }
+
+        // Show recommendations
+        function showRecommendations(location, budget, cuisines, rating, notes) {
+            const recommendationsGrid = document.getElementById('recommendations-grid');
+            const recommendationsSection = document.getElementById('recommendations');
+            
+            // Sample recommendations (replace with actual API data)
+            const recommendations = [
+                {
+                    name: "The Garden Restaurant",
+                    cuisine: "Indian",
+                    rating: 4.5,
+                    price: "₹800-₹1200",
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Authentic Indian cuisine with a modern twist"
+                },
+                {
+                    name: "Dragon Palace",
+                    cuisine: "Chinese",
+                    rating: 4.3,
+                    price: "₹600-₹900",
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Traditional Chinese dishes in an elegant setting"
+                },
+                {
+                    name: "Bella Italia",
+                    cuisine: "Italian",
+                    rating: 4.6,
+                    price: "₹1000-₹1500",
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Classic Italian pasta and wood-fired pizzas"
+                }
+            ];
+            
+            recommendationsGrid.innerHTML = recommendations.map(restaurant => `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">${restaurant.name}</h4>
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-500">⭐</span>
+                            <span class="ml-1">${restaurant.rating}</span>
+                            <span class="ml-auto text-gray-600">${restaurant.price}</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">${restaurant.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${restaurant.cuisine}</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Show recommendations section
+            recommendationsSection.classList.remove('hidden');
+            recommendationsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
