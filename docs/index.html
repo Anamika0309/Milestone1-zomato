@@ -1,206 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crave AI - Smart Restaurant Recommendations</title>
+    <title>Crave AI Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
-    <div class="min-h-screen">
-        <!-- Header -->
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <h1 class="text-2xl font-bold text-blue-600">🍽️ Crave AI</h1>
-                    <button onclick="toggleTheme()" class="p-2 rounded hover:bg-gray-100">
-                        <span id="theme-icon">🌙</span>
-                    </button>
-                </div>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Crave AI - Test Version</h1>
+    
+    <div class="max-w-2xl mx-auto">
+        <h2 class="text-xl font-semibold mb-4">Test Form</h2>
+        
+        <form id="testForm" class="space-y-4 mb-8">
+            <div>
+                <label class="block text-sm font-medium mb-1">Location</label>
+                <select id="location" class="w-full p-2 border rounded">
+                    <option value="">Select location</option>
+                    <option value="Brookefield">Brookefield</option>
+                    <option value="Indiranagar">Indiranagar</option>
+                </select>
             </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-            <div class="max-w-4xl mx-auto px-4 text-center">
-                <h2 class="text-4xl font-bold mb-4">Your Personalized Restaurant Guide</h2>
-                <p class="text-xl mb-8">Let our AI find the perfect dining experience for you</p>
-                <button onclick="document.getElementById('form').scrollIntoView()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
-                    Get Started
-                </button>
+            
+            <div>
+                <label class="block text-sm font-medium mb-1">Budget</label>
+                <select id="budget" class="w-full p-2 border rounded">
+                    <option value="">Select budget</option>
+                    <option value="low">Under ₹500</option>
+                    <option value="medium">₹500-₹1000</option>
+                </select>
             </div>
-        </section>
-
-        <!-- Form Section -->
-        <section id="form" class="py-16 bg-white">
-            <div class="max-w-2xl mx-auto px-4">
-                <h3 class="text-3xl font-bold text-center mb-8">Tell Us Your Preferences</h3>
-                
-                <form onsubmit="handleSubmit(event)" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                        <select id="location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Select location</option>
-                            <option value="Brookefield">Brookefield</option>
-                            <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
-                            <option value="Indiranagar">Indiranagar</option>
-                            <option value="Whitefield">Whitefield</option>
-                            <option value="HSR Layout">HSR Layout</option>
-                            <option value="Jayanagar">Jayanagar</option>
-                            <option value="BTM Layout">BTM Layout</option>
-                            <option value="Marathahalli">Marathahalli</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Budget per Person</label>
-                        <select id="budget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Select budget</option>
-                            <option value="low">Under ₹500</option>
-                            <option value="medium">₹500-₹1000</option>
-                            <option value="high">₹1000-₹2000</option>
-                            <option value="premium">Above ₹2000</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Cuisine Type</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center">
-                                <input type="checkbox" value="indian" class="mr-2"> Indian
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="chinese" class="mr-2"> Chinese
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="italian" class="mr-2"> Italian
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="mexican" class="mr-2"> Mexican
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
-                        <select id="rating" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Select rating</option>
-                            <option value="3">3+ Stars</option>
-                            <option value="4">4+ Stars</option>
-                            <option value="4.5">4.5+ Stars</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
-                        <textarea id="notes" rows="3" placeholder="Any specific preferences..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700">
-                            Get Recommendations
-                        </button>
-                    </div>
-                </form>
+            
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+                Get Recommendations
+            </button>
+        </form>
+        
+        <div id="results" class="hidden">
+            <h3 class="text-xl font-semibold mb-4">Results:</h3>
+            <div id="restaurantCards" class="grid gap-4">
+                <!-- Results will appear here -->
             </div>
-        </section>
-
-        <!-- Recommendations Section -->
-        <section id="recommendations" class="py-16 bg-gray-50 hidden">
-            <div class="max-w-6xl mx-auto px-4">
-                <h3 class="text-3xl font-bold text-center mb-12">Your Restaurant Recommendations</h3>
-                <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Recommendations will be inserted here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Loading -->
-        <div id="loading" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-8 text-center">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                <p>Finding restaurants...</p>
-            </div>
+        </div>
+        
+        <div id="debug" class="mt-8 p-4 bg-gray-100 rounded">
+            <h3 class="font-semibold mb-2">Debug Info:</h3>
+            <div id="debugInfo">Waiting for form submission...</div>
         </div>
     </div>
 
     <script>
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-            document.getElementById('theme-icon').textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        // Debug function
+        function updateDebug(message) {
+            document.getElementById('debugInfo').innerHTML += '<br>' + message;
+            console.log(message);
         }
-
-        // Handle form submission
-        function handleSubmit(event) {
-            event.preventDefault();
+        
+        updateDebug('JavaScript loaded successfully');
+        
+        // Form handler
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            updateDebug('Form submitted!');
             
-            const recommendationsSection = document.getElementById('recommendations');
-            const recommendationsGrid = document.getElementById('recommendations-grid');
-            
-            // Get form data (not used for now, but keeping for future)
             const location = document.getElementById('location').value;
             const budget = document.getElementById('budget').value;
-            const rating = document.getElementById('rating').value;
-            const notes = document.getElementById('notes').value;
             
-            const cuisines = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(cb => cb.value);
+            updateDebug('Location: ' + location);
+            updateDebug('Budget: ' + budget);
             
-            // Sample recommendations - show immediately
-            const recommendations = [
-                {
-                    name: "The Garden Restaurant",
-                    cuisine: "Indian",
-                    rating: 4.5,
-                    price: "₹800-₹1200",
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
-                    description: "Authentic Indian cuisine with modern twist"
-                },
-                {
-                    name: "Dragon Palace",
-                    cuisine: "Chinese", 
-                    rating: 4.3,
-                    price: "₹600-₹900",
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
-                    description: "Traditional Chinese dishes"
-                },
-                {
-                    name: "Bella Italia",
-                    cuisine: "Italian",
-                    rating: 4.6,
-                    price: "₹1000-₹1500", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
-                    description: "Classic Italian pasta and pizza"
-                }
+            // Show results immediately
+            const resultsDiv = document.getElementById('results');
+            const cardsDiv = document.getElementById('restaurantCards');
+            
+            // Create sample restaurant cards
+            const restaurants = [
+                { name: 'Test Restaurant 1', cuisine: 'Indian', rating: 4.5, price: '₹800' },
+                { name: 'Test Restaurant 2', cuisine: 'Chinese', rating: 4.3, price: '₹600' }
             ];
             
-            // Display recommendations immediately
-            recommendationsGrid.innerHTML = recommendations.map(restaurant => `
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">${restaurant.name}</h4>
-                        <div class="flex items-center mb-2">
-                            <span class="text-yellow-500">⭐</span>
-                            <span class="ml-1">${restaurant.rating}</span>
-                            <span class="ml-auto text-gray-600">${restaurant.price}</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">${restaurant.description}</p>
-                        <div class="flex items-center justify-between">
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${restaurant.cuisine}</span>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
+            cardsDiv.innerHTML = restaurants.map(r => `
+                <div class="bg-white p-4 border rounded shadow">
+                    <h4 class="font-bold">${r.name}</h4>
+                    <p>Cuisine: ${r.cuisine}</p>
+                    <p>Rating: ${r.rating} ⭐</p>
+                    <p>Price: ${r.price}</p>
                 </div>
             `).join('');
             
-            // Show recommendations immediately
-            recommendationsSection.classList.remove('hidden');
-            recommendationsSection.scrollIntoView({ behavior: 'smooth' });
-        }
+            resultsDiv.classList.remove('hidden');
+            updateDebug('Results displayed!');
+        });
     </script>
 </body>
 </html>
