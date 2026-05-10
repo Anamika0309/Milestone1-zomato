@@ -650,6 +650,7 @@
         document.getElementById('recommendationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Get form values
             const location = document.getElementById('location').value;
             const budget = document.getElementById('budget').value;
             const rating = document.getElementById('rating').value;
@@ -658,9 +659,19 @@
             const cuisines = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(cb => cb.value);
             
+            // Validation check
+            if (!location || !budget || !rating) {
+                alert('Please fill in all required fields: Location, Budget, and Rating');
+                return;
+            }
+            
+            console.log('Form submitted with:', { location, budget, rating, cuisines, notes });
+            
             // Get restaurants for selected location (show top 5)
             const allRestaurants = restaurantData[location] || restaurantData['Brookefield'];
             const restaurants = allRestaurants.slice(0, 5);
+            
+            console.log('Restaurants found:', restaurants.length);
             
             // Display recommendations in screen 2
             const recommendationsGrid = document.getElementById('recommendations-grid');
@@ -721,8 +732,11 @@
                 </div>
             `).join('');
             
-            // Show screen 2
-            showScreen2();
+            // Show screen 2 with a small delay to ensure rendering
+            setTimeout(() => {
+                showScreen2();
+                console.log('Switched to screen 2');
+            }, 100);
         });
 
         // Individual restaurant functions
