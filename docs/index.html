@@ -310,25 +310,31 @@
 
         function goBack() {
             console.log('goBack function called');
-            // Hide screen2 immediately
-            const screen1 = document.getElementById('screen1');
-            const screen2 = document.getElementById('screen2');
-            
-            console.log('screen1:', screen1, 'screen2:', screen2);
-            
-            screen2.style.display = 'none';
-            screen1.style.display = 'block';
-            screen1.classList.remove('hidden');
-            
-            // Force scroll to top
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-            window.scrollTo(0, 0);
-            
-            // Remove screen2 from DOM after transition
-            setTimeout(() => {
-                screen2.classList.add('hidden');
-            }, 50);
+            try {
+                // Hide screen2 immediately
+                const screen1 = document.getElementById('screen1');
+                const screen2 = document.getElementById('screen2');
+                
+                console.log('screen1:', screen1, 'screen2:', screen2);
+                
+                if (screen1 && screen2) {
+                    screen2.style.display = 'none';
+                    screen1.style.display = 'block';
+                    screen1.classList.remove('hidden');
+                    
+                    // Force scroll to top
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    window.scrollTo(0, 0);
+                    
+                    console.log('Successfully switched back to screen1');
+                } else {
+                    console.error('Screen elements not found:', { screen1, screen2 });
+                }
+            } catch (error) {
+                console.error('Error in goBack function:', error);
+                alert('Error going back. Please try again.');
+            }
         }
 
         function showScreen2() {
