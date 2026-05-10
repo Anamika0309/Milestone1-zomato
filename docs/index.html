@@ -149,7 +149,7 @@
                         <span class="relative z-10">Begin Your Journey</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </button>
-                    <button onclick="showInfo()" class="px-8 py-5 border-2 border-purple-600 text-purple-600 rounded-full font-semibold text-lg hover:bg-purple-50 transition-all">
+                    <button onclick="showInfo()" class="px-8 py-5 border-2 border-purple-400 text-purple-400 rounded-full font-semibold text-lg hover:bg-purple-800 transition-all">
                         Learn More
                     </button>
                 </div>
@@ -157,7 +157,7 @@
         </section>
 
         <!-- Features Section -->
-        <section class="py-20 bg-white/80 backdrop-blur-sm">
+        <section class="py-20 bg-gray-900/80 backdrop-blur-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 transition-all hover:scale-105">
@@ -167,7 +167,7 @@
                         <h3 class="text-xl font-bold mb-4 gradient-text">AI-Powered</h3>
                         <p class="text-gray-600 leading-relaxed">Advanced neural networks analyze your preferences with 95% accuracy to find perfect restaurant matches</p>
                     </div>
-                    <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 transition-all hover:scale-105">
+                    <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:bg-gray-800 transition-all hover:scale-110">
                         <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
                             <span class="text-3xl">📍</span>
                         </div>
@@ -186,7 +186,7 @@
         </section>
 
         <!-- Form Section -->
-        <section id="form-section" class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
+        <section id="form-section" class="py-20 bg-gradient-to-br from-gray-900 to-purple-900">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h3 class="text-4xl font-bold mb-4 gradient-text">Tell Us Your Preferences</h3>
@@ -196,10 +196,10 @@
                 <form id="recommendationForm" class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10">
                     <div class="grid md:grid-cols-2 gap-8">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                            <label class="block text-sm font-bold text-gray-300 mb-3 flex items-center">
                                 <span class="mr-2">📍</span> Location
                             </label>
-                            <select id="location" required class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
+                            <select id="location" required class="w-full px-5 py-4 border-2 border-gray-600 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
                                 <option value="">Select your location</option>
                                 <option value="Brookefield">Brookefield</option>
                                 <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
@@ -213,10 +213,10 @@
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                            <label class="block text-sm font-bold text-gray-300 mb-3 flex items-center">
                                 <span class="mr-2">💰</span> Budget per Person
                             </label>
-                            <select id="budget" required class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
+                            <select id="budget" required class="w-full px-5 py-4 border-2 border-gray-600 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
                                 <option value="">Select budget range</option>
                                 <option value="low">Under ₹500</option>
                                 <option value="medium">₹500-₹1000</option>
@@ -368,7 +368,7 @@
                     cuisine: "Andhra", 
                     rating: 4.5, 
                     price: "₹500", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1585032229652-2c3f7b6d9d4b?w=400",
                     description: "Spicy Andhra cuisine known for its bold flavors and authentic preparation methods",
                     specialties: ["Andhra Meals", "Gongura Mamsam", "Ulava Charu"],
                     ambiance: "Casual",
@@ -380,7 +380,7 @@
                     cuisine: "BBQ", 
                     rating: 4.7, 
                     price: "₹800", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    image: "https://images.unsplash.com/photo-1546827240-2a1c8c7c8e5e?w=400",
                     description: "Live grilling experience with unlimited BBQ starters and main course buffet",
                     specialties: ["Grilled Kebabs", "BBQ Platters", "Desserts"],
                     ambiance: "Lively",
@@ -406,7 +406,7 @@
                     cuisine: "Italian", 
                     rating: 4.8, 
                     price: "₹1200", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1563248161-9c8e3d0b0c6e?w=400",
                     description: "Fine dining Italian restaurant with authentic pasta and truffle specialties",
                     specialties: ["Truffle Pasta", "Risotto", "Tiramisu"],
                     ambiance: "Elegant",
@@ -418,7 +418,7 @@
                     cuisine: "Continental", 
                     rating: 4.4, 
                     price: "₹700", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1528747358735-96c3e06c2b8c?w=400",
                     description: "Cozy continental cafe with artisanal coffee and European breakfast options",
                     specialties: ["Continental Breakfast", "Artisanal Coffee", "Pastries"],
                     ambiance: "Cozy",
@@ -432,7 +432,7 @@
                     cuisine: "Cafe", 
                     rating: 4.5, 
                     price: "₹600", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1528747358735-96c3e06c2b8c?w=400",
                     description: "Intimate cafe with eclectic decor and creative fusion menu",
                     specialties: ["Fusion Dishes", "Artisanal Coffee", "Desserts"],
                     ambiance: "Artistic",
@@ -444,7 +444,7 @@
                     cuisine: "Continental", 
                     rating: 4.7, 
                     price: "₹1000", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    image: "https://images.unsplash.com/photo-1567620115741-ebad1b422b03?w=400",
                     description: "European delicatessen with imported meats, cheeses, and authentic continental recipes",
                     specialties: ["Cold Cuts", "Cheese Platters", "European Breads"],
                     ambiance: "Sophisticated",
@@ -456,7 +456,7 @@
                     cuisine: "Asian", 
                     rating: 4.6, 
                     price: "₹800", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1569717114515-5d5a5a5c8e2e?w=400",
                     description: "Modern Asian fusion restaurant specializing in steamed buns and creative fillings",
                     specialties: ["Steamed Bao", "Asian Fusion", "Bubble Tea"],
                     ambiance: "Contemporary",
@@ -470,7 +470,7 @@
                     cuisine: "Multi-cuisine", 
                     rating: 4.4, 
                     price: "₹700", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1565928745498-5b5a9e6c8e2e?w=400",
                     description: "Multi-cuisine restaurant offering diverse menu from Indian to continental dishes",
                     specialties: ["North Indian", "Chinese", "Continental"],
                     ambiance: "Family-friendly",
@@ -482,7 +482,7 @@
                     cuisine: "Mediterranean", 
                     rating: 4.6, 
                     price: "₹1100", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    image: "https://images.unsplash.com/photo-1556909221-1d0f7b8f4d5e?w=400",
                     description: "Mediterranean restaurant with authentic Greek and Italian dishes in elegant setting",
                     specialties: ["Greek Mezze", "Wood-fired Pizza", "Seafood"],
                     ambiance: "Mediterranean",
@@ -494,7 +494,7 @@
                     cuisine: "Brewery", 
                     rating: 4.3, 
                     price: "₹900", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    image: "https://images.unsplash.com/photo-1537151631159-9bf3d6a7b1c7?w=400",
                     description: "Craft beer paradise with extensive tap selection and gourmet pub food",
                     specialties: ["Craft Beers", "Gourmet Burgers", "Beer Pairings"],
                     ambiance: "Lively",
@@ -508,7 +508,7 @@
                     cuisine: "Continental", 
                     rating: 4.5, 
                     price: "₹800", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1556909221-1d0f7b8f4d5e?w=400",
                     description: "Upscale continental restaurant with modern European and Asian fusion cuisine",
                     specialties: ["Continental Fusion", "Wine Selection", "Desserts"],
                     ambiance: "Upscale",
@@ -520,7 +520,7 @@
                     cuisine: "Seafood", 
                     rating: 4.8, 
                     price: "₹1200", 
-                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    image: "https://images.unsplash.com/photo-1546827240-2a1c8c7c8e5e?w=400",
                     description: "Premium seafood restaurant specializing in fresh catches and ocean delicacies",
                     specialties: ["Fresh Seafood", "Sushi", "Ocean Specialties"],
                     ambiance: "Elegant",
@@ -532,7 +532,7 @@
                     cuisine: "Italian", 
                     rating: 4.4, 
                     price: "₹700", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1563248161-9c8e3d0b0c6e?w=400",
                     description: "Authentic Italian pasta bar with handmade pasta and traditional recipes",
                     specialties: ["Fresh Pasta", "Italian Sauces", "Wine Selection"],
                     ambiance: "Rustic",
@@ -546,7 +546,7 @@
                     cuisine: "South Indian", 
                     rating: 4.6, 
                     price: "₹500", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1511690743698-d85d44f9c846?w=400",
                     description: "Traditional South Indian restaurant with authentic recipes from generations",
                     specialties: ["South Indian Thali", "Dosa varieties", "Traditional Sweets"],
                     ambiance: "Traditional",
@@ -558,7 +558,7 @@
                     cuisine: "Tiffin", 
                     rating: 4.3, 
                     price: "₹300", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1585032229652-2c3f7b6d9d4b?w=400",
                     description: "Traditional tiffin service delivering homemade South Indian meals to offices and homes",
                     specialties: ["Tiffin Meals", "South Indian Lunch", "Homely Food"],
                     ambiance: "Simple",
@@ -570,7 +570,7 @@
                     cuisine: "Cafe", 
                     rating: 4.5, 
                     price: "₹600", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1528747358735-96c3e06c2b8c?w=400",
                     description: "Beautiful garden cafe with artisanal coffee, fresh baked goods, and light meals",
                     specialties: ["Artisanal Coffee", "Fresh Baked Goods", "Healthy Options"],
                     ambiance: "Garden",
@@ -584,7 +584,7 @@
                     cuisine: "North Indian", 
                     rating: 4.4, 
                     price: "₹600", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1565928745498-5b5a9e6c8e2e?w=400",
                     description: "North Indian restaurant known for rich curries and tandoori specialties",
                     specialties: ["North Indian Curries", "Tandoori Items", "Indian Breads"],
                     ambiance: "Casual",
@@ -596,7 +596,7 @@
                     cuisine: "Chinese", 
                     rating: 4.6, 
                     price: "₹700", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1569717114515-5d5a5a5c8e2e?w=400",
                     description: "Contemporary Chinese restaurant with modern decor and fusion dishes",
                     specialties: ["Fusion Chinese", "Dim Sum", "Hot Pot"],
                     ambiance: "Modern",
@@ -608,7 +608,7 @@
                     cuisine: "Pizza", 
                     rating: 4.5, 
                     price: "₹500", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
                     description: "Artisanal pizza place with wood-fired ovens and gourmet toppings",
                     specialties: ["Wood-fired Pizza", "Gourmet Toppings", "Italian Desserts"],
                     ambiance: "Casual",
@@ -622,7 +622,7 @@
                     cuisine: "Continental", 
                     rating: 4.3, 
                     price: "₹800", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1511690743698-d85d44f9c846?w=400",
                     description: "Continental bistro with European comfort food and local favorites",
                     specialties: ["European Comfort Food", "Local Favorites", "Continental Breakfast"],
                     ambiance: "Bistro",
@@ -634,7 +634,7 @@
                     cuisine: "Indian", 
                     rating: 4.7, 
                     price: "₹600", 
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    image: "https://images.unsplash.com/photo-1585032229652-2c3f7b6d9d4b?w=400",
                     description: "Aromatic Indian restaurant specializing in regional spices and traditional cooking methods",
                     specialties: ["Regional Indian", "Spicy Specialties", "Traditional Desserts"],
                     ambiance: "Aromatic",
@@ -646,7 +646,7 @@
                     cuisine: "Multi-cuisine", 
                     rating: 4.4, 
                     price: "₹700", 
-                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    image: "https://images.unsplash.com/photo-1569717114515-5d5a5a5c8e2e?w=400",
                     description: "Modern multi-cuisine restaurant offering global flavors in contemporary setting",
                     specialties: ["Global Fusion", "Modern Indian", "Asian Street Food"],
                     ambiance: "Contemporary",
