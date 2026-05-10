@@ -282,7 +282,7 @@
     </div>
 
     <!-- Screen 2: Restaurant Recommendations -->
-    <div id="screen2" class="hidden relative bg-gradient-to-br from-purple-50 to-pink-50">
+    <div id="screen2" class="hidden relative bg-gradient-to-br from-gray-900 to-purple-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-4xl font-bold gradient-text">Your Perfect Matches</h2>
@@ -686,7 +686,7 @@
             // Display recommendations in screen 2
             const recommendationsGrid = document.getElementById('recommendations-grid');
             recommendationsGrid.innerHTML = restaurants.map((restaurant, index) => `
-                <div class="card-hover bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden group">
+                <div class="bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden group hover:scale-105 transition-transform">
                     <div class="relative">
                         <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-64 object-cover">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-lg">
@@ -698,7 +698,7 @@
                     </div>
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-2xl font-bold text-gray-900">${restaurant.name}</h4>
+                            <h4 class="text-2xl font-bold text-white">${restaurant.name}</h4>
                             <div class="flex items-center space-x-3">
                                 <span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                                     ${restaurant.cuisine}
@@ -707,24 +707,24 @@
                             </div>
                         </div>
                         
-                        <p class="text-gray-600 mb-6 leading-relaxed text-sm">${restaurant.description}</p>
+                        <p class="text-gray-300 mb-6 leading-relaxed text-sm">${restaurant.description}</p>
                         
                         <div class="grid grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center text-xs text-gray-500">
+                            <div class="flex items-center text-xs text-gray-300">
                                 <span class="mr-2">⏱️</span>
                                 <span>${restaurant.deliveryTime}</span>
                             </div>
-                            <div class="flex items-center text-xs text-gray-500">
+                            <div class="flex items-center text-xs text-gray-300">
                                 <span class="mr-2">🎯</span>
                                 <span>${restaurant.bestFor}</span>
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <div class="text-sm font-semibold text-gray-700 mb-2">Specialties:</div>
+                            <div class="text-sm font-semibold text-white mb-2">Specialties:</div>
                             <div class="flex flex-wrap gap-2">
                                 ${restaurant.specialties.map(spec => `
-                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">${spec}</span>
+                                    <span class="bg-purple-600 text-white px-2 py-1 rounded-full text-xs">${spec}</span>
                                 `).join('')}
                             </div>
                         </div>
@@ -734,7 +734,7 @@
                                 <span class="relative z-10">View Details</span>
                                 <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </button>
-                            <button onclick="saveRestaurant('${restaurant.name}')" class="flex-1 px-4 py-3 border-2 border-purple-600 text-purple-600 rounded-xl font-semibold hover:bg-purple-50 transition-all">
+                            <button onclick="saveRestaurant('${restaurant.name}')" class="flex-1 px-4 py-3 border-2 border-purple-400 text-purple-400 rounded-xl font-semibold hover:bg-purple-800 transition-all">
                                 Save
                             </button>
                         </div>
