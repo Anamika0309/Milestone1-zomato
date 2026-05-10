@@ -327,15 +327,43 @@
         }
 
         function goBack() {
-            document.getElementById('screen2').classList.add('hidden');
-            document.getElementById('screen1').classList.remove('hidden');
+            // Hide screen2 immediately
+            const screen1 = document.getElementById('screen1');
+            const screen2 = document.getElementById('screen2');
+            
+            screen2.style.display = 'none';
+            screen1.style.display = 'block';
+            screen1.classList.remove('hidden');
+            
+            // Force scroll to top
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
             window.scrollTo(0, 0);
+            
+            // Remove screen2 from DOM after transition
+            setTimeout(() => {
+                screen2.classList.add('hidden');
+            }, 50);
         }
 
         function showScreen2() {
-            document.getElementById('screen1').classList.add('hidden');
-            document.getElementById('screen2').classList.remove('hidden');
+            // Hide screen1 immediately
+            const screen1 = document.getElementById('screen1');
+            const screen2 = document.getElementById('screen2');
+            
+            screen1.style.display = 'none';
+            screen2.style.display = 'block';
+            screen2.classList.remove('hidden');
+            
+            // Force scroll to top
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
             window.scrollTo(0, 0);
+            
+            // Remove screen1 from DOM after transition
+            setTimeout(() => {
+                screen1.classList.add('hidden');
+            }, 50);
         }
 
         // Enhanced restaurant data with more details
@@ -732,11 +760,10 @@
                 </div>
             `).join('');
             
-            // Show screen 2 with a small delay to ensure rendering
-            setTimeout(() => {
-                showScreen2();
-                console.log('Switched to screen 2');
-            }, 100);
+            // Show screen 2 immediately with better transition
+            console.log('About to switch to screen 2');
+            showScreen2();
+            console.log('Switched to screen 2');
         });
 
         // Individual restaurant functions
