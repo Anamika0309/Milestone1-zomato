@@ -9,16 +9,18 @@
         }
         
         .dark {
-            background-color: #1a1a1a;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #ffffff;
         }
         
         .dark .bg-white {
-            background-color: #2a2a2a;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .dark .bg-gray-50 {
-            background-color: #2a2a2a;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .dark .text-gray-900 {
@@ -26,295 +28,277 @@
         }
         
         .dark .text-gray-600 {
-            color: #cccccc;
+            color: #b8c5d6;
         }
         
         .dark .border-gray-300 {
-            border-color: #444444;
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         .dark input, .dark select, .dark textarea {
-            background-color: #2a2a2a;
-            border-color: #444444;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
             color: #ffffff;
         }
         
         .card-hover {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.1;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            border-radius: 30%;
+            top: 60%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 8px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-blue-600">Crave AI</h1>
+<body class="bg-gray-50 text-gray-900 min-h-screen relative overflow-hidden">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes shape-1"></div>
+    <div class="floating-shapes shape-2"></div>
+
+    <!-- Screen 1: Main App -->
+    <div id="screen1" class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">🍽️</span>
+                        </div>
+                        <h1 class="text-2xl font-bold gradient-text">Crave AI</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleTheme()" class="p-3 rounded-xl hover:bg-gray-100 transition-all hover:scale-110">
+                            <span id="theme-icon" class="text-xl">🌙</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100">
-                        <span id="theme-icon">🌙</span>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="relative py-24 overflow-hidden">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="mb-8">
+                    <h2 class="text-6xl md:text-7xl font-bold mb-6 gradient-text">
+                        Discover Your Perfect
+                        <span class="block text-4xl md:text-5xl mt-2">Dining Experience</span>
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-12 text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                        Our AI analyzes thousands of restaurants to find your <span class="font-semibold text-purple-600">perfect match</span> based on location, budget, cuisine, and preferences
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <button onclick="scrollToForm()" class="group relative px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105 overflow-hidden">
+                        <span class="relative z-10">Begin Your Journey</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </button>
+                    <button onclick="showInfo()" class="px-8 py-5 border-2 border-purple-600 text-purple-600 rounded-full font-semibold text-lg hover:bg-purple-50 transition-all">
+                        Learn More
                     </button>
                 </div>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-5xl md:text-6xl font-bold mb-6">
-                Your Personalized Restaurant Guide
-            </h2>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-                Let our AI sommelier curate the perfect dining experience based on your unique preferences
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="scrollToForm()" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition">
-                    Get Started
-                </button>
-                <button onclick="showInfo()" class="border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition">
-                    Learn More
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="mb-6">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                            <span class="text-2xl">🤖</span>
+        <!-- Features Section -->
+        <section class="py-20 bg-white/80 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 transition-all hover:scale-105">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                            <span class="text-3xl">🤖</span>
                         </div>
+                        <h3 class="text-xl font-bold mb-4 gradient-text">AI-Powered</h3>
+                        <p class="text-gray-600 leading-relaxed">Advanced neural networks analyze your preferences with 95% accuracy to find perfect restaurant matches</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">AI-Powered</h3>
-                    <p class="text-gray-600">Advanced machine learning algorithms analyze your preferences to find perfect restaurant matches.</p>
-                </div>
-                <div class="text-center">
-                    <div class="mb-6">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                            <span class="text-2xl">📍</span>
+                    <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 transition-all hover:scale-105">
+                        <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                            <span class="text-3xl">📍</span>
                         </div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-600">Location-Based</h3>
+                        <p class="text-gray-600 leading-relaxed">Hyperlocal recommendations tailored to your specific neighborhood and preferred dining areas with real-time availability</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Location-Based</h3>
-                    <p class="text-gray-600">Get recommendations tailored to your specific neighborhood and preferred dining areas.</p>
-                </div>
-                <div class="text-center">
-                    <div class="mb-6">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                            <span class="text-2xl">⭐</span>
+                    <div class="group text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all hover:scale-105">
+                        <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                            <span class="text-3xl">⭐</span>
                         </div>
+                        <h3 class="text-xl font-bold mb-4 text-green-600">Quality Focused</h3>
+                        <p class="text-gray-600 leading-relaxed">Only the top 5% rated restaurants with excellent reviews and customer satisfaction scores above 4.5</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Quality Focused</h3>
-                    <p class="text-gray-600">Only the best-rated restaurants with excellent reviews and customer satisfaction.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Form Section -->
-    <section id="form-section" class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold mb-4">Tell Us Your Preferences</h3>
-                <p class="text-gray-600 text-lg">Let our AI find the perfect restaurant for you</p>
+        <!-- Form Section -->
+        <section id="form-section" class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-4 gradient-text">Tell Us Your Preferences</h3>
+                    <p class="text-gray-600 text-lg">Let our AI curate the perfect dining experience for you</p>
+                </div>
+                
+                <form id="recommendationForm" class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                                <span class="mr-2">📍</span> Location
+                            </label>
+                            <select id="location" required class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
+                                <option value="">Select your location</option>
+                                <option value="Brookefield">Brookefield</option>
+                                <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
+                                <option value="Indiranagar">Indiranagar</option>
+                                <option value="Whitefield">Whitefield</option>
+                                <option value="HSR Layout">HSR Layout</option>
+                                <option value="Jayanagar">Jayanagar</option>
+                                <option value="BTM Layout">BTM Layout</option>
+                                <option value="Marathahalli">Marathahalli</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                                <span class="mr-2">💰</span> Budget per Person
+                            </label>
+                            <select id="budget" required class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
+                                <option value="">Select budget range</option>
+                                <option value="low">Under ₹500</option>
+                                <option value="medium">₹500-₹1000</option>
+                                <option value="high">₹1000-₹2000</option>
+                                <option value="premium">Above ₹2000</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                                <span class="mr-2">🍽️</span> Preferred Cuisine
+                            </label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all cursor-pointer">
+                                    <input type="checkbox" value="indian" class="mr-3">
+                                    <span>Indian</span>
+                                </label>
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all cursor-pointer">
+                                    <input type="checkbox" value="chinese" class="mr-3">
+                                    <span>Chinese</span>
+                                </label>
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all cursor-pointer">
+                                    <input type="checkbox" value="italian" class="mr-3">
+                                    <span>Italian</span>
+                                </label>
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all cursor-pointer">
+                                    <input type="checkbox" value="mexican" class="mr-3">
+                                    <span>Mexican</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                                <span class="mr-2">⭐</span> Minimum Rating
+                            </label>
+                            <select id="rating" required class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg transition-all">
+                                <option value="">Select minimum rating</option>
+                                <option value="3">3+ Stars</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="4.5">4.5+ Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
+                            <span class="mr-2">📝</span> Additional Preferences
+                        </label>
+                        <textarea id="notes" rows="4" placeholder="Dietary requirements, allergies, special occasions, or any specific preferences..." 
+                                  class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-500 focus:border-transparent text-lg resize-none transition-all"></textarea>
+                    </div>
+                    
+                    <div class="mt-10 text-center">
+                        <button type="submit" id="submit-btn" class="group relative px-16 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold text-xl hover:shadow-2xl transition-all hover:scale-105 overflow-hidden">
+                            <span class="relative z-10">🤖 Get AI Recommendations</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Screen 2: Restaurant Recommendations -->
+    <div id="screen2" class="hidden min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-4xl font-bold gradient-text">Your Perfect Matches</h2>
+                <button onclick="goBack()" class="flex items-center px-6 py-3 bg-white/80 backdrop-blur-md rounded-xl font-semibold text-purple-600 hover:bg-white transition-all hover:scale-105">
+                    <span class="mr-2">←</span> Back to Search
+                </button>
             </div>
             
-            <form id="recommendationForm" class="bg-white rounded-2xl shadow-xl p-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                        <select id="location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Select your location</option>
-                            <option value="Brookefield">Brookefield</option>
-                            <option value="Koramangala 3Rd Block">Koramangala 3rd Block</option>
-                            <option value="Indiranagar">Indiranagar</option>
-                            <option value="Whitefield">Whitefield</option>
-                            <option value="HSR Layout">HSR Layout</option>
-                            <option value="Jayanagar">Jayanagar</option>
-                            <option value="BTM Layout">BTM Layout</option>
-                            <option value="Marathahalli">Marathahalli</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Budget per Person</label>
-                        <select id="budget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Select budget range</option>
-                            <option value="low">Under ₹500</option>
-                            <option value="medium">₹500-₹1000</option>
-                            <option value="high">₹1000-₹2000</option>
-                            <option value="premium">Above ₹2000</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Cuisine</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center">
-                                <input type="checkbox" value="indian" class="mr-2">
-                                <span>Indian</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="chinese" class="mr-2">
-                                <span>Chinese</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="italian" class="mr-2">
-                                <span>Italian</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" value="mexican" class="mr-2">
-                                <span>Mexican</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
-                        <select id="rating" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Select minimum rating</option>
-                            <option value="3">3+ Stars</option>
-                            <option value="4">4+ Stars</option>
-                            <option value="4.5">4.5+ Stars</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="mt-8">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Additional Preferences (Optional)</label>
-                    <textarea id="notes" rows="4" placeholder="Any specific dietary requirements, allergies, or preferences..." 
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
-                </div>
-                
-                <div class="mt-8 text-center">
-                    <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-12 py-4 rounded-full font-semibold text-lg hover:bg-blue-700 transition">
-                        Get AI Recommendations
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Recommendations Section -->
-    <section id="recommendations-section" class="py-20 bg-white hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold mb-4">Your AI Recommendations</h3>
-                <p class="text-gray-600 text-lg">Perfect restaurants handpicked just for you</p>
-            </div>
             <div id="recommendations-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Recommendations will be inserted here -->
-            </div>
-            
-            <div class="mt-12 text-center">
-                <button onclick="showDetailedView()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                    View Detailed Analysis
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Detailed Analysis Section -->
-    <section id="detailed-section" class="py-20 bg-gray-50 hidden">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold mb-4">Detailed Analysis</h3>
-                <p class="text-gray-600 text-lg">Our AI's reasoning behind these recommendations</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h4 class="text-2xl font-bold mb-6 text-blue-600">Why These Restaurants?</h4>
-                    <ul class="space-y-4 text-gray-700">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">✓</span>
-                            <span>High customer ratings (4.3+ stars)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">✓</span>
-                            <span>Matches your budget preferences</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">✓</span>
-                            <span>Popular in your selected area</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">✓</span>
-                            <span>Excellent cuisine variety</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h4 class="text-2xl font-bold mb-6 text-blue-600">AI Confidence Score</h4>
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Overall Match</span>
-                                <span class="text-green-600 font-bold">92%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-3">
-                                <div class="bg-green-500 h-3 rounded-full" style="width: 92%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Location Accuracy</span>
-                                <span class="text-blue-600 font-bold">88%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-3">
-                                <div class="bg-blue-500 h-3 rounded-full" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Price Match</span>
-                                <span class="text-purple-600 font-bold">95%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-3">
-                                <div class="bg-purple-500 h-3 rounded-full" style="width: 95%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <button onclick="resetForm()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
-                    Start New Search
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Info Modal -->
-    <div id="info-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4">
-            <div class="text-center mb-6">
-                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-3xl">🤖</span>
-                </div>
-                <h3 class="text-3xl font-bold mb-4">About Crave AI</h3>
-            </div>
-            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
-                Crave AI uses advanced artificial intelligence to provide personalized restaurant recommendations based on your preferences, location, and budget. Our smart algorithm analyzes thousands of restaurants to find the perfect match for you.
-            </p>
-            <div class="flex justify-center">
-                <button onclick="closeInfo()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                    Got it!
-                </button>
+                <!-- Restaurant cards will be inserted here -->
             </div>
         </div>
     </div>
@@ -339,24 +323,328 @@
         }
 
         function showInfo() {
-            document.getElementById('info-modal').classList.remove('hidden');
+            alert('Crave AI uses advanced AI to analyze thousands of restaurants and find your perfect dining match based on location, budget, cuisine, and preferences.');
         }
 
-        function closeInfo() {
-            document.getElementById('info-modal').classList.add('hidden');
+        function goBack() {
+            document.getElementById('screen2').classList.add('hidden');
+            document.getElementById('screen1').classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
-        function showDetailedView() {
-            document.getElementById('detailed-section').classList.remove('hidden');
-            document.getElementById('detailed-section').scrollIntoView({ behavior: 'smooth' });
+        function showScreen2() {
+            document.getElementById('screen1').classList.add('hidden');
+            document.getElementById('screen2').classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
-        function resetForm() {
-            document.getElementById('recommendationForm').reset();
-            document.getElementById('recommendations-section').classList.add('hidden');
-            document.getElementById('detailed-section').classList.add('hidden');
-            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
-        }
+        // Enhanced restaurant data with more details
+        const restaurantData = {
+            'Brookefield': [
+                { 
+                    name: "Paradise Biryani", 
+                    cuisine: "Biryani", 
+                    rating: 4.8, 
+                    price: "₹600", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Authentic Hyderabadi biryani with aromatic spices and tender meat, cooked in traditional dum style",
+                    specialties: ["Hyderabadi Biryani", "Haleem", "Kebabs"],
+                    ambiance: "Traditional",
+                    deliveryTime: "30-45 min",
+                    bestFor: "Family dinners, Authentic biryani lovers"
+                },
+                { 
+                    name: "Meghana Foods", 
+                    cuisine: "Andhra", 
+                    rating: 4.5, 
+                    price: "₹500", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Spicy Andhra cuisine known for its bold flavors and authentic preparation methods",
+                    specialties: ["Andhra Meals", "Gongura Mamsam", "Ulava Charu"],
+                    ambiance: "Casual",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Spicy food lovers, Budget-friendly meals"
+                },
+                { 
+                    name: "Barbeque Nation", 
+                    cuisine: "BBQ", 
+                    rating: 4.7, 
+                    price: "₹800", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Live grilling experience with unlimited BBQ starters and main course buffet",
+                    specialties: ["Grilled Kebabs", "BBQ Platters", "Desserts"],
+                    ambiance: "Lively",
+                    deliveryTime: "45-60 min",
+                    bestFor: "Weekend dinners, Group outings, BBQ enthusiasts"
+                }
+            ],
+            'Koramangala 3Rd Block': [
+                { 
+                    name: "Toit", 
+                    cuisine: "Brewery", 
+                    rating: 4.6, 
+                    price: "₹900", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Craft brewery with handcrafted beers and wood-fired pizzas in a vibrant atmosphere",
+                    specialties: ["Craft Beers", "Wood-fired Pizza", "Brewery Snacks"],
+                    ambiance: "Trendy",
+                    deliveryTime: "35-50 min",
+                    bestFor: "Beer lovers, Casual dining, Date nights"
+                },
+                { 
+                    name: "Truffles", 
+                    cuisine: "Italian", 
+                    rating: 4.8, 
+                    price: "₹1200", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Fine dining Italian restaurant with authentic pasta and truffle specialties",
+                    specialties: ["Truffle Pasta", "Risotto", "Tiramisu"],
+                    ambiance: "Elegant",
+                    deliveryTime: "40-55 min",
+                    bestFor: "Special occasions, Romantic dinners, Fine dining"
+                },
+                { 
+                    name: "Cafe Noir", 
+                    cuisine: "Continental", 
+                    rating: 4.4, 
+                    price: "₹700", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Cozy continental cafe with artisanal coffee and European breakfast options",
+                    specialties: ["Continental Breakfast", "Artisanal Coffee", "Pastries"],
+                    ambiance: "Cozy",
+                    deliveryTime: "20-35 min",
+                    bestFor: "Breakfast meetings, Coffee lovers, Casual work meals"
+                }
+            ],
+            'Indiranagar': [
+                { 
+                    name: "The Hole in the Wall", 
+                    cuisine: "Cafe", 
+                    rating: 4.5, 
+                    price: "₹600", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Intimate cafe with eclectic decor and creative fusion menu",
+                    specialties: ["Fusion Dishes", "Artisanal Coffee", "Desserts"],
+                    ambiance: "Artistic",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Creative dining, Instagram-worthy spots, Young crowd"
+                },
+                { 
+                    name: "Smoke House Deli", 
+                    cuisine: "Continental", 
+                    rating: 4.7, 
+                    price: "₹1000", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "European delicatessen with imported meats, cheeses, and authentic continental recipes",
+                    specialties: ["Cold Cuts", "Cheese Platters", "European Breads"],
+                    ambiance: "Sophisticated",
+                    deliveryTime: "30-45 min",
+                    bestFor: "Business lunches, Continental food lovers, Premium dining"
+                },
+                { 
+                    name: "The Fatty Bao", 
+                    cuisine: "Asian", 
+                    rating: 4.6, 
+                    price: "₹800", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Modern Asian fusion restaurant specializing in steamed buns and creative fillings",
+                    specialties: ["Steamed Bao", "Asian Fusion", "Bubble Tea"],
+                    ambiance: "Contemporary",
+                    deliveryTime: "20-35 min",
+                    bestFor: "Quick meals, Asian food lovers, Trendy dining"
+                }
+            ],
+            'Whitefield': [
+                { 
+                    name: "The Whitefield Kitchen", 
+                    cuisine: "Multi-cuisine", 
+                    rating: 4.4, 
+                    price: "₹700", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Multi-cuisine restaurant offering diverse menu from Indian to continental dishes",
+                    specialties: ["North Indian", "Chinese", "Continental"],
+                    ambiance: "Family-friendly",
+                    deliveryTime: "30-50 min",
+                    bestFor: "Family dinners, Group meals, Diverse tastes"
+                },
+                { 
+                    name: "Olive Bar & Kitchen", 
+                    cuisine: "Mediterranean", 
+                    rating: 4.6, 
+                    price: "₹1100", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Mediterranean restaurant with authentic Greek and Italian dishes in elegant setting",
+                    specialties: ["Greek Mezze", "Wood-fired Pizza", "Seafood"],
+                    ambiance: "Mediterranean",
+                    deliveryTime: "35-55 min",
+                    bestFor: "Date nights, Mediterranean cuisine lovers, Upscale dining"
+                },
+                { 
+                    name: "The Biere Club", 
+                    cuisine: "Brewery", 
+                    rating: 4.3, 
+                    price: "₹900", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Craft beer paradise with extensive tap selection and gourmet pub food",
+                    specialties: ["Craft Beers", "Gourmet Burgers", "Beer Pairings"],
+                    ambiance: "Lively",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Beer enthusiasts, Casual dining, Sports viewing"
+                }
+            ],
+            'HSR Layout': [
+                { 
+                    name: "The HSR Club", 
+                    cuisine: "Continental", 
+                    rating: 4.5, 
+                    price: "₹800", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Upscale continental restaurant with modern European and Asian fusion cuisine",
+                    specialties: ["Continental Fusion", "Wine Selection", "Desserts"],
+                    ambiance: "Upscale",
+                    deliveryTime: "35-50 min",
+                    bestFor: "Business meetings, Date nights, Special occasions"
+                },
+                { 
+                    name: "The Black Pearl", 
+                    cuisine: "Seafood", 
+                    rating: 4.8, 
+                    price: "₹1200", 
+                    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400",
+                    description: "Premium seafood restaurant specializing in fresh catches and ocean delicacies",
+                    specialties: ["Fresh Seafood", "Sushi", "Ocean Specialties"],
+                    ambiance: "Elegant",
+                    deliveryTime: "40-60 min",
+                    bestFor: "Anniversary dinners, Seafood lovers, Luxury dining"
+                },
+                { 
+                    name: "The Pasta Bar", 
+                    cuisine: "Italian", 
+                    rating: 4.4, 
+                    price: "₹700", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Authentic Italian pasta bar with handmade pasta and traditional recipes",
+                    specialties: ["Fresh Pasta", "Italian Sauces", "Wine Selection"],
+                    ambiance: "Rustic",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Casual dining, Pasta lovers, Wine enthusiasts"
+                }
+            ],
+            'Jayanagar': [
+                { 
+                    name: "The Jayanagar Kitchen", 
+                    cuisine: "South Indian", 
+                    rating: 4.6, 
+                    price: "₹500", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Traditional South Indian restaurant with authentic recipes from generations",
+                    specialties: ["South Indian Thali", "Dosa varieties", "Traditional Sweets"],
+                    ambiance: "Traditional",
+                    deliveryTime: "20-35 min",
+                    bestFor: "Authentic South Indian food, Budget-friendly, Family meals"
+                },
+                { 
+                    name: "Mavalli Tiffins", 
+                    cuisine: "Tiffin", 
+                    rating: 4.3, 
+                    price: "₹300", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Traditional tiffin service delivering homemade South Indian meals to offices and homes",
+                    specialties: ["Tiffin Meals", "South Indian Lunch", "Homely Food"],
+                    ambiance: "Simple",
+                    deliveryTime: "15-30 min",
+                    bestFor: "Office lunches, Daily meals, Homely food lovers"
+                },
+                { 
+                    name: "The Garden Cafe", 
+                    cuisine: "Cafe", 
+                    rating: 4.5, 
+                    price: "₹600", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Beautiful garden cafe with artisanal coffee, fresh baked goods, and light meals",
+                    specialties: ["Artisanal Coffee", "Fresh Baked Goods", "Healthy Options"],
+                    ambiance: "Garden",
+                    deliveryTime: "20-30 min",
+                    bestFor: "Coffee meetings, Light meals, Relaxing atmosphere"
+                }
+            ],
+            'BTM Layout': [
+                { 
+                    name: "The BTM Kitchen", 
+                    cuisine: "North Indian", 
+                    rating: 4.4, 
+                    price: "₹600", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "North Indian restaurant known for rich curries and tandoori specialties",
+                    specialties: ["North Indian Curries", "Tandoori Items", "Indian Breads"],
+                    ambiance: "Casual",
+                    deliveryTime: "25-40 min",
+                    bestFor: "North Indian food lovers, Casual dining, Group meals"
+                },
+                { 
+                    name: "The Red Box", 
+                    cuisine: "Chinese", 
+                    rating: 4.6, 
+                    price: "₹700", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Contemporary Chinese restaurant with modern decor and fusion dishes",
+                    specialties: ["Fusion Chinese", "Dim Sum", "Hot Pot"],
+                    ambiance: "Modern",
+                    deliveryTime: "30-45 min",
+                    bestFor: "Chinese food lovers, Modern dining, Group outings"
+                },
+                { 
+                    name: "The Pizza Place", 
+                    cuisine: "Pizza", 
+                    rating: 4.5, 
+                    price: "₹500", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Artisanal pizza place with wood-fired ovens and gourmet toppings",
+                    specialties: ["Wood-fired Pizza", "Gourmet Toppings", "Italian Desserts"],
+                    ambiance: "Casual",
+                    deliveryTime: "20-35 min",
+                    bestFor: "Pizza lovers, Casual dining, Quick meals"
+                }
+            ],
+            'Marathahalli': [
+                { 
+                    name: "The Marathahalli Bistro", 
+                    cuisine: "Continental", 
+                    rating: 4.3, 
+                    price: "₹800", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Continental bistro with European comfort food and local favorites",
+                    specialties: ["European Comfort Food", "Local Favorites", "Continental Breakfast"],
+                    ambiance: "Bistro",
+                    deliveryTime: "30-45 min",
+                    bestFor: "Comfort food lovers, Casual dining, Local cuisine"
+                },
+                { 
+                    name: "The Spice Garden", 
+                    cuisine: "Indian", 
+                    rating: 4.7, 
+                    price: "₹600", 
+                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+                    description: "Aromatic Indian restaurant specializing in regional spices and traditional cooking methods",
+                    specialties: ["Regional Indian", "Spicy Specialties", "Traditional Desserts"],
+                    ambiance: "Aromatic",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Spicy food lovers, Traditional Indian cuisine, Aromatic dining"
+                },
+                { 
+                    name: "The Urban Kitchen", 
+                    cuisine: "Multi-cuisine", 
+                    rating: 4.4, 
+                    price: "₹700", 
+                    image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400",
+                    description: "Modern multi-cuisine restaurant offering global flavors in contemporary setting",
+                    specialties: ["Global Fusion", "Modern Indian", "Asian Street Food"],
+                    ambiance: "Contemporary",
+                    deliveryTime: "25-40 min",
+                    bestFor: "Modern dining, Fusion food lovers, Trendy atmosphere"
+                }
+            ]
+        };
 
         // Form handler
         document.getElementById('recommendationForm').addEventListener('submit', function(e) {
@@ -370,77 +658,62 @@
             const cuisines = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(cb => cb.value);
             
-            // Location-specific restaurant data
-            const restaurantData = {
-                'Brookefield': [
-                    { name: "Paradise Biryani", cuisine: "Biryani", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Authentic Hyderabadi biryani" },
-                    { name: "Meghana Foods", cuisine: "Andhra", rating: 4.3, price: "₹500", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Spicy Andhra cuisine" },
-                    { name: "Barbeque Nation", cuisine: "BBQ", rating: 4.6, price: "₹800", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Grilled delicacies" }
-                ],
-                'Koramangala 3Rd Block': [
-                    { name: "Toit", cuisine: "Brewery", rating: 4.4, price: "₹900", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Craft beer and pizza" },
-                    { name: "Truffles", cuisine: "Italian", rating: 4.5, price: "₹1200", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Italian fine dining" },
-                    { name: "Cafe Noir", cuisine: "Continental", rating: 4.2, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Cozy cafe atmosphere" }
-                ],
-                'Indiranagar': [
-                    { name: "The Hole in the Wall", cuisine: "Cafe", rating: 4.3, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Cozy cafe atmosphere" },
-                    { name: "Smoke House Deli", cuisine: "Continental", rating: 4.6, price: "₹1000", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "European delicacies" },
-                    { name: "The Fatty Bao", cuisine: "Asian", rating: 4.4, price: "₹800", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Asian fusion" }
-                ],
-                'Whitefield': [
-                    { name: "The Whitefield Kitchen", cuisine: "Multi-cuisine", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Multi-cuisine restaurant" },
-                    { name: "Olive Bar & Kitchen", cuisine: "Mediterranean", rating: 4.5, price: "₹1100", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Mediterranean cuisine" },
-                    { name: "The Biere Club", cuisine: "Brewery", rating: 4.2, price: "₹900", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Craft brewery" }
-                ],
-                'HSR Layout': [
-                    { name: "The HSR Club", cuisine: "Continental", rating: 4.4, price: "₹800", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Continental cuisine" },
-                    { name: "The Black Pearl", cuisine: "Seafood", rating: 4.6, price: "₹1200", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", description: "Fresh seafood" },
-                    { name: "The Pasta Bar", cuisine: "Italian", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Italian pasta" }
-                ],
-                'Jayanagar': [
-                    { name: "The Jayanagar Kitchen", cuisine: "South Indian", rating: 4.5, price: "₹500", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "South Indian cuisine" },
-                    { name: "Mavalli Tiffins", cuisine: "Tiffin", rating: 4.2, price: "₹300", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Traditional tiffin service" },
-                    { name: "The Garden Cafe", cuisine: "Cafe", rating: 4.4, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Garden cafe" }
-                ],
-                'BTM Layout': [
-                    { name: "The BTM Kitchen", cuisine: "North Indian", rating: 4.3, price: "₹600", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "North Indian cuisine" },
-                    { name: "The Red Box", cuisine: "Chinese", rating: 4.5, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Chinese restaurant" },
-                    { name: "The Pizza Place", cuisine: "Pizza", rating: 4.4, price: "₹500", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Pizza place" }
-                ],
-                'Marathahalli': [
-                    { name: "The Marathahalli Bistro", cuisine: "Continental", rating: 4.2, price: "₹800", image: "https://images.unsplash.com/photo-1517248135467-4c8ed12e86b9?w=400", description: "Continental bistro" },
-                    { name: "The Spice Garden", cuisine: "Indian", rating: 4.5, price: "₹600", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Indian spices" },
-                    { name: "The Urban Kitchen", cuisine: "Multi-cuisine", rating: 4.3, price: "₹700", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", description: "Urban dining" }
-                ]
-            };
+            // Get restaurants for selected location (show top 5)
+            const allRestaurants = restaurantData[location] || restaurantData['Brookefield'];
+            const restaurants = allRestaurants.slice(0, 5);
             
-            // Get restaurants for selected location
-            const restaurants = restaurantData[location] || restaurantData['Brookefield'];
-            
-            // Display recommendations
+            // Display recommendations in screen 2
             const recommendationsGrid = document.getElementById('recommendations-grid');
-            recommendationsGrid.innerHTML = restaurants.map(restaurant => `
-                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden">
+            recommendationsGrid.innerHTML = restaurants.map((restaurant, index) => `
+                <div class="card-hover bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden group">
                     <div class="relative">
-                        <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-56 object-cover">
-                        <div class="absolute top-4 right-4 bg-white rounded-full px-3 py-1 shadow-lg">
-                            <span class="text-sm font-semibold">${restaurant.rating} ⭐</span>
+                        <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-lg">
+                            <span class="text-sm font-bold text-purple-600">${restaurant.rating} ⭐</span>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-3 py-1 text-xs font-bold">
+                            #${index + 1}
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold mb-3">${restaurant.name}</h4>
-                        <div class="flex items-center mb-3">
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">
-                                ${restaurant.cuisine}
-                            </span>
-                            <span class="text-lg font-bold text-gray-600">${restaurant.price}</span>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-2xl font-bold text-gray-900">${restaurant.name}</h4>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                    ${restaurant.cuisine}
+                                </span>
+                                <span class="text-xl font-bold text-purple-600">${restaurant.price}</span>
+                            </div>
                         </div>
-                        <p class="text-gray-600 mb-4 leading-relaxed">${restaurant.description}</p>
+                        
+                        <p class="text-gray-600 mb-6 leading-relaxed text-sm">${restaurant.description}</p>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="flex items-center text-xs text-gray-500">
+                                <span class="mr-2">⏱️</span>
+                                <span>${restaurant.deliveryTime}</span>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <span class="mr-2">🎯</span>
+                                <span>${restaurant.bestFor}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-sm font-semibold text-gray-700 mb-2">Specialties:</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${restaurant.specialties.map(spec => `
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">${spec}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
                         <div class="flex items-center justify-between">
-                            <button onclick="viewRestaurant('${restaurant.name}')" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                View Details
+                            <button onclick="viewRestaurant('${restaurant.name}')" class="group flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105 overflow-hidden">
+                                <span class="relative z-10">View Details</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </button>
-                            <button onclick="saveRestaurant('${restaurant.name}')" class="border-2 border-blue-600 text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition">
+                            <button onclick="saveRestaurant('${restaurant.name}')" class="flex-1 px-4 py-3 border-2 border-purple-600 text-purple-600 rounded-xl font-semibold hover:bg-purple-50 transition-all">
                                 Save
                             </button>
                         </div>
@@ -448,18 +721,17 @@
                 </div>
             `).join('');
             
-            // Show recommendations section
-            document.getElementById('recommendations-section').classList.remove('hidden');
-            document.getElementById('recommendations-section').scrollIntoView({ behavior: 'smooth' });
+            // Show screen 2
+            showScreen2();
         });
 
         // Individual restaurant functions
         function viewRestaurant(name) {
-            alert(`Viewing details for ${name}`);
+            alert(`Viewing detailed information for ${name}\n\nThis would open a detailed view with:\n- Full menu\n- Photos gallery\n- Reviews\n- Contact info\n- Location map\n\nComing soon!`);
         }
 
         function saveRestaurant(name) {
-            alert(`${name} saved to your favorites!`);
+            alert(`${name} has been saved to your favorites!\n\nYou can access your saved restaurants anytime from your profile.`);
         }
     </script>
 </body>
